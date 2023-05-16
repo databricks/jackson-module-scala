@@ -3,7 +3,8 @@ package com.fasterxml.jackson.module.scala.introspect
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{Inside, OptionValues, LoneElement, FlatSpec}
-import org.scalatest.matchers.{HavePropertyMatcher, HavePropertyMatchResult, ShouldMatchers}
+import org.scalatest.Matchers
+import org.scalatest.matchers.{HavePropertyMatcher, HavePropertyMatchResult}
 import reflect.NameTransformer
 import com.fasterxml.jackson.module.scala.BaseSpec
 import java.lang.reflect.Member

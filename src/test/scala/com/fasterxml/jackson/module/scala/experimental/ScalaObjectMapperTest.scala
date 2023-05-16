@@ -1,7 +1,7 @@
 package com.fasterxml.jackson.module.scala.experimental
 
 import org.scalatest.{Matchers, FlatSpec}
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
@@ -66,9 +66,9 @@ class ScalaObjectMapperTest extends FlatSpec with Matchers {
   }
 
   it should "read values from json parser" in {
-    import scala.collection.JavaConversions._
+    import scala.collection.JavaConverters._
     val parser = mapper.getFactory.createParser(listGenericJson)
-    val result = mapper.readValues[GenericTestClass[Int]](parser).toList
+    val result = mapper.readValues[GenericTestClass[Int]](parser).asScala.toList
     result should equal(listGenericInt)
   }
 

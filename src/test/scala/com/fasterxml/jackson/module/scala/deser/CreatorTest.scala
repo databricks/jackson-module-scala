@@ -2,7 +2,7 @@ package com.fasterxml.jackson.module.scala.deser
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
 object CreatorTest
 {

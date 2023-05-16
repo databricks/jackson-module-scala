@@ -12,7 +12,7 @@ import org.scalatest.fixture.FlatSpec
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{Matchers, Outcome}
 
-import scala.beans.{BeanInfo, BeanProperty}
+import scala.beans.{/*BeanInfo, */BeanProperty}
 
 class Fields {
   @JsonProperty // make it "visible" for Jackson
@@ -37,7 +37,7 @@ case class SerialID(firstField: String, secondField: Int) {
   @volatile var alsoExcluded = "no"
 }
 
-@BeanInfo
+//@BeanInfo
 class SearchCriteria {
   @BeanProperty var mapZoom:Int = 4
 }

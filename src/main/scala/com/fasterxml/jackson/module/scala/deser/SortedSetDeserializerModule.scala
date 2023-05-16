@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.`type`.CollectionLikeType
 import java.util.AbstractCollection
 import com.fasterxml.jackson.module.scala.introspect.OrderingLocator
 import java.lang.Object
-import scala.collection.generic.SortedSetFactory
 import scala.Some
 import scala.collection.immutable
 import scala.language.postfixOps
@@ -36,7 +35,7 @@ private object SortedSetDeserializer {
 
   def lookupBuilder(s: String): BuilderFactory = {
     val moduleClass = lookupClass(s + "$").get
-    val module = moduleClass.getField("MODULE$").get(null).asInstanceOf[SortedSetFactory[SortedSet]]
+    val module = moduleClass.getField("MODULE$").get(null).asInstanceOf[SortedIterableFactory[SortedSet]]
     (o) => module.newBuilder(o)
   }
 

@@ -1,4 +1,4 @@
-import sbtrelease.ReleasePlugin._
+/*import sbtrelease.ReleasePlugin._
 import ReleaseKeys._
 import sbtrelease.ReleaseStateTransformations._
 import sbtrelease.Utilities._
@@ -77,4 +77,4 @@ tagName <<= (name, version in ThisBuild) map { (n,v) => n + "-" + v }
 // sign artifacts
 
 publishArtifactsAction := PgpKeys.publishSigned.value
-
+*/

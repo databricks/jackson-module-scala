@@ -2,7 +2,7 @@ package com.fasterxml.jackson.module.scala.util
 
 import collection.mutable.{ArrayBuffer, ListBuffer}
 import collection.GenTraversable
-import collection.generic.GenericCompanion
+import scala.collection.Factory
 import scala.reflect.ClassTag
 
 import scala.language.higherKinds
@@ -12,18 +12,18 @@ import scala.language.higherKinds
  * get registered first.
  */
 class CompanionSorter[CC[X] <: GenTraversable[X]] {
-  type HKClassManifest[CC2[_]] = ClassTag[CC2[_]]
 
-  private[this] val companions = new ArrayBuffer[(Class[_], GenericCompanion[CC])]()
+  private[this] val companions = new ArrayBuffer[(Class[_], Factory[_, CC[_]])]()
 
-  def add[T[X] <: CC[X] : HKClassManifest](companion: GenericCompanion[T]): CompanionSorter[CC] = {
-    companions += implicitly[HKClassManifest[T]].runtimeClass -> companion
+  def add[T[_] <: CC[_]](companion: Factory[_, CC[_]])
+                        (implicit ct: ClassTag[T[_]]): CompanionSorter[CC] = {
+    companions += ct.runtimeClass -> companion
     this
   }
 
-  def toList: List[(Class[_], GenericCompanion[CC])] = {
+  def toList: List[(Class[_], Factory[_, CC[_]])] = {
     val cs = companions.toArray
-    val output = new ListBuffer[(Class[_], GenericCompanion[CC])]()
+    val output = new ListBuffer[(Class[_], Factory[_, CC[_]])]()
 
     val remaining = cs.map(_ => 1)
     val adjMatrix = Array.ofDim[Int](cs.length, cs.length)

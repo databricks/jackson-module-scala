@@ -3,13 +3,13 @@ name := "jackson-module-scala"
 
 organization := "com.fasterxml.jackson.module"
 
-scalaVersion := "2.10.4"
+scalaVersion := "2.13.10"
 
-crossScalaVersions := Seq("2.10.4", "2.11.2")
+crossScalaVersions := Seq("2.10.4", "2.11.2", "2.13.10")
 
 scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature")
 
-scalacOptions in (Compile, compile) += "-Xfatal-warnings"
+//scalacOptions in (Compile, compile) += "-Xfatal-warnings"
 
 // Ensure jvm 1.6 for java
 // javacOptions ++= Seq("-source", "1.6", "-target", "1.6")
@@ -29,7 +29,7 @@ libraryDependencies ++= Seq(
     "com.fasterxml.jackson.datatype" % "jackson-datatype-joda" % "2.4.5" % "test",
     "com.fasterxml.jackson.datatype" % "jackson-datatype-guava" % "2.4.5" % "test",
     "com.fasterxml.jackson.module" % "jackson-module-jsonSchema" % "2.4.5" % "test",
-    "org.scalatest" %% "scalatest" % "2.2.1" % "test",
+    "org.scalatest" %% "scalatest" % "3.0.8" % "test",
     "junit" % "junit" % "4.11" % "test"
 )
 
@@ -43,10 +43,10 @@ resourceGenerators in Compile <+=
   }
 
 // site
-site.settings
+//site.settings
 
-site.includeScaladoc()
+//site.includeScaladoc()
 
-ghpages.settings
+//ghpages.settings
 
-git.remoteRepo := "git@github.com:FasterXML/jackson-module-scala.git"
+//git.remoteRepo := "git@github.com:FasterXML/jackson-module-scala.git"

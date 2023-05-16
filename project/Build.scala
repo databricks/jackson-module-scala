@@ -1,4 +1,4 @@
-import sbt._
+/*import sbt._
 import Keys._
 import sbtrelease._
 import com.typesafe.sbt.SbtSite.SiteKeys._
@@ -17,4 +17,4 @@ object Build extends Build {
     val st2 = executeTask(makeSite, "Making doc site")(st)
     executeTask(pushSite, "Publishing doc site")(st2)
   }
-}
+}*/

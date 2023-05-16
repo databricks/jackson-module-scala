@@ -2,7 +2,7 @@ package com.fasterxml.jackson
 package module.scala
 package ser
 
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith

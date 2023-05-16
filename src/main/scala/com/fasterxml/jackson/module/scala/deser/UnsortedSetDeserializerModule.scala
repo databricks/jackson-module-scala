@@ -1,8 +1,7 @@
 package com.fasterxml.jackson.module.scala.deser
 
-import scala.collection.generic.GenericCompanion
 import java.util.AbstractCollection
-import scala.collection.{immutable, mutable}
+import scala.collection.{immutable, mutable, Factory}
 import com.fasterxml.jackson.module.scala.modifiers.SetTypeModifierModule
 import com.fasterxml.jackson.databind.`type`.CollectionLikeType
 import com.fasterxml.jackson.databind.jsontype.TypeDeserializer
@@ -23,18 +22,26 @@ private class SetBuilderWrapper[E](val builder: mutable.Builder[E, _ <: collecti
 
 private object UnsortedSetDeserializer {
   val COMPANIONS = new CompanionSorter[collection.Set]()
-    .add(immutable.HashSet)
-    .add(immutable.ListSet)
-    .add(immutable.Set)
-    .add(mutable.HashSet)
-    .add(mutable.LinkedHashSet)
-    .add(mutable.Set)
+    .add[immutable.HashSet](immutable.HashSet)
+    .add[immutable.ListSet](immutable.ListSet)
+    .add[immutable.Set](immutable.Set)
+    .add[mutable.HashSet](mutable.HashSet)
+    .add[mutable.LinkedHashSet](mutable.LinkedHashSet)
+    .add[mutable.Set](mutable.Set)
     .toList
 
-  def companionFor(cls: Class[_]): GenericCompanion[collection.Set] =
-    COMPANIONS find { _._1.isAssignableFrom(cls) } map { _._2 } getOrElse Set
+  def companionFor(cls: Class[_]): Factory[_, collection.Set[_]] = {
+    val f: Option[Factory[_, collection.Set[_]]] = COMPANIONS
+      .find { _._1.isAssignableFrom(cls) }
+      .map { _._2 }
 
-  def builderFor[A](cls: Class[_]): mutable.Builder[A, collection.Set[A]] = companionFor(cls).newBuilder[A]
+    val s: Factory[_, Set[_]] = Set
+
+    f getOrElse s
+  }
+
+  def builderFor[A](cls: Class[_]): mutable.Builder[A, collection.Set[A]] =
+    companionFor(cls).newBuilder.asInstanceOf[mutable.Builder[A,collection.Set[A]]]
 }
 
 private class SetInstantiator(config: DeserializationConfig, valueType: Class[_])
