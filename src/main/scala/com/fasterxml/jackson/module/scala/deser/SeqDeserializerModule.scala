@@ -41,6 +41,7 @@ private object SeqDeserializer {
 //    .add(mutable.ResizableArray) Removed in Scala 2.13
     .add[Queue](Queue)
     .add[Stream](Stream)
+    .add[LazyList](LazyList) // Added in Scala 2.13
     .toList
 
   def companionFor(cls: Class[_]): Factory[_, collection.Iterable[_]] = {
